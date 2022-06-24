@@ -1,24 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Add from "./components/Add/Add";
+import Counter from "./components/Counter/Counter";
+import Edit from "./components/Edit/Edit";
+import List from "./components/LIst/List";
+import CounterContextProvider from "./context/counterContext";
+import ToDoContextProvider from "./context/todoContext";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ToDoContextProvider>
+      <CounterContextProvider>
+        <BrowserRouter>
+          <Routes>
+            {/* <Route path="/counter" element={<Counter />} /> */}
+            <Route path="/add" element={<Add />} />
+            <Route path="/list" element={<List />} />
+            <Route path="/edit/:id" element={<Edit />} />
+          </Routes>
+        </BrowserRouter>
+      </CounterContextProvider>
+    </ToDoContextProvider>
   );
 }
 
